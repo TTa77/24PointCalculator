@@ -25,11 +25,11 @@ class Interactor(Thread):
     def receive_input(self):
         user_input = input("Input 4 numbers, separate by SPACE and submit by ENTER. Or type \"Q\" to exit: ")
 
-        if user_input.strip() in ("Q", "q"):
-            exit()
-
         while not Interactor.check_input(user_input):
+            if user_input.strip() in ("Q", "q"):
+                exit()
             print("Invalid input, please check and re-type.\n")
+            user_input = input("Input 4 numbers, separate by SPACE and submit by ENTER. Or type \"Q\" to exit: ")
 
         self.num_1, self.num_2, self.num_3, self.num_4 = \
             tuple(i for i in filter(lambda x: str.isdecimal(x), user_input.split(" ")))
